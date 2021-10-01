@@ -28,11 +28,20 @@ class MainViewController: UITableViewController {
     
         var content = cell.defaultContentConfiguration()
         content.text = restaurantNames[indexPath.row]
+        content.image = UIImage(named: restaurantNames[indexPath.row])
         
         cell.contentConfiguration = content
-        
+        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 2 
+        cell.imageView?.clipsToBounds = true
+         
         return cell
     }
+    
+    // MARK: - Table View Delegate
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         return 85
+    }
+        
     
 
     /*
