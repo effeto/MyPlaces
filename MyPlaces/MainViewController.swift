@@ -9,7 +9,10 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let restaurantNames = ["Alaturka", "Yun",  "Mons", "Greegos", "SHUM", "Atalier"]
+    
+    
+    
+    let places = Place.getPlaces()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,28 +22,24 @@ class MainViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-        return restaurantNames.count
+        return places.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
     
-        var content = cell.defaultContentConfiguration()
-        content.text = restaurantNames[indexPath.row]
-        content.image = UIImage(named: restaurantNames[indexPath.row])
-        
-        cell.contentConfiguration = content
-        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 2 
-        cell.imageView?.clipsToBounds = true
+        cell.nameLabel.text = places[indexPath.row].name
+        cell.locationLabel.text = places[indexPath.row].location
+        cell.typeLabel.text = places[indexPath.row].type
+        cell.imageOfPlace.image = UIImage(named: places[indexPath.row].image)
+        cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2
+        cell.imageOfPlace.clipsToBounds = true
          
         return cell
     }
     
-    // MARK: - Table View Delegate
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-         return 85
-    }
+
         
     
 
@@ -51,7 +50,9 @@ class MainViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-    }
+    }#imageLiteral(resourceName: "Alaturka.jpeg")
     */
+    
+    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
 
 }
